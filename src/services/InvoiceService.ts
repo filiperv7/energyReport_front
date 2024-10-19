@@ -22,6 +22,19 @@ class InvoiceService {
       throw error
     }
   }
+
+  async getInvoicesByClient(clientNumber: string) {
+    try {
+      const response = await axios.get(
+        `${this.baseUrl}/invoices_by_client/${clientNumber}`
+      )
+
+      return response
+    } catch (error) {
+      console.error('Error ao buscar faturas:', error)
+      throw error
+    }
+  }
 }
 
 export default new InvoiceService()
