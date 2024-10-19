@@ -1,26 +1,16 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import { FileUpload } from '../components/FileUpload'
 
 export const HomePage: React.FC = () => {
   const [clientNumber, setClientNumber] = useState('')
 
-  const handleSearchInvoices = async () => {
-    try {
-      const response = await axios.get(
-        `/api/invoices?clientNumber=${clientNumber}`
-      )
-      if (response.status === 200) {
-        window.location.href = `/invoices/${clientNumber}`
-      }
-    } catch (error) {
-      console.error('Erro ao buscar faturas:', error)
-    }
+  const navigateToInvoice = async () => {
+    window.location.href = `/client/${clientNumber}/invoices`
   }
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-br from-[#002C1F] to-[#00C26A]">
-      <div className="bg-white p-10 rounded-xl text-center shadow-lg flex flex-col gap-5">
+    <div className="flex justify-center items-center px-6 h-screen bg-gradient-to-br from-[#002C1F] to-[#00C26A]">
+      <div className="bg-white p-10 rounded-xl text-center shadow-lg flex flex-col gap-5 max-[425px]:px-6">
         <div className="text-2xl font-bold">Energy Report</div>
         <div className="flex items-center gap-1 pb-1">
           <input
@@ -32,7 +22,7 @@ export const HomePage: React.FC = () => {
           />
 
           <button
-            onClick={handleSearchInvoices}
+            onClick={navigateToInvoice}
             className="bg-[#00C26A] text-white px-4 py-2 rounded hover:bg-[#008F55]"
           >
             Buscar
