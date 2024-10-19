@@ -5,7 +5,15 @@ export const HomePage: React.FC = () => {
   const [clientNumber, setClientNumber] = useState('')
 
   const navigateToInvoice = async () => {
-    window.location.href = `/client/${clientNumber}/invoices`
+    if (clientNumber.length >= 10) {
+      window.location.href = `/client/${clientNumber}/invoices`
+    }
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && clientNumber.length >= 10) {
+      navigateToInvoice()
+    }
   }
 
   return (
@@ -18,12 +26,18 @@ export const HomePage: React.FC = () => {
             placeholder="Nº do Cliente"
             value={clientNumber}
             onChange={e => setClientNumber(e.target.value)}
+            onKeyDown={handleKeyPress}
             className="w-3/4 p-2 border border-gray-300 rounded"
           />
 
           <button
             onClick={navigateToInvoice}
-            className="bg-[#00C26A] text-white px-4 py-2 rounded hover:bg-[#008F55]"
+            disabled={clientNumber.length < 10}
+            className={`px-4 py-2 rounded font-semibold transition-all duration-300 ${
+              clientNumber.length < 10
+                ? 'bg-green-200 cursor-not-allowed'
+                : 'bg-[#00C26A] text-white hover:bg-[#008F55]'
+            }`}
           >
             Buscar
           </button>
