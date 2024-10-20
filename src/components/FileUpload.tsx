@@ -5,11 +5,13 @@ import InvoiceService from '../services/InvoiceService'
 
 export const FileUpload: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [loading, setLoading] = useState(false)
 
   const onDrop = async (acceptedFiles: File[]) => {
     const file = acceptedFiles[0]
     if (file && file.type === 'application/pdf') {
       setSelectedFile(file)
+      setLoading(true)
 
       const formData = new FormData()
       formData.append('file', file)
@@ -22,6 +24,8 @@ export const FileUpload: React.FC = () => {
         }
       } catch {
         alert('Falha ao enviar o arquivo.')
+      } finally {
+        setLoading(false)
       }
     } else {
       alert('Por favor, selecione um arquivo PDF.')
@@ -42,10 +46,15 @@ export const FileUpload: React.FC = () => {
 
   return (
     <div className="border-2 border-dashed p-6 text-center cursor-pointer rounded-lg hover:bg-gray-100">
-      <div {...getRootProps()} className="flex justify-center items-center">
+      <div
+        {...getRootProps()}
+        className="flex justify-center items-center select-none"
+      >
         <input {...getInputProps()} />
         <p className="flex items-center">
-          {selectedFile ? (
+          {loading ? (
+            <div className="spinner"></div>
+          ) : selectedFile ? (
             <span className="flex items-center gap-2">
               {selectedFile.name}
               <X
