@@ -35,6 +35,19 @@ class InvoiceService {
       throw error
     }
   }
+
+  async getDashboardData(idInvoice: number) {
+    try {
+      const response = await axios.get(
+        `${this.baseUrl}/invoice/${idInvoice}/dashboard`
+      )
+
+      return response
+    } catch (error) {
+      console.error('Error ao buscar esta fatura:', error)
+      throw error
+    }
+  }
 }
 
 export default new InvoiceService()
