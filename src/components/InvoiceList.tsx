@@ -1,6 +1,7 @@
 import { ChartLine, DownloadSimple, Flag } from '@phosphor-icons/react'
 import React, { useEffect, useState } from 'react'
 import InvoiceService from '../services/InvoiceService'
+import { Loading } from './Loading'
 
 export type ResponseListInvoicesType = {
   id: number
@@ -40,12 +41,9 @@ export const InvoiceList: React.FC<{
     fetchInvoices()
   }, [clientNumber])
 
-  if (loading)
-    return (
-      <div className="h-screen flex items-center justify-center  -mt-11">
-        <p className="text-3xl text-white font-black">Carregando...</p>
-      </div>
-    )
+  if (loading) {
+    return <Loading />
+  }
 
   return (
     <div>

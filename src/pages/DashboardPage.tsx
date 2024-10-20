@@ -11,6 +11,7 @@ import {
 import React, { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2'
 import { useParams } from 'react-router-dom'
+import { Loading } from '../components/Loading'
 import InvoiceService from '../services/InvoiceService'
 
 ChartJS.register(
@@ -64,11 +65,7 @@ const DashboardPage: React.FC = () => {
   })
 
   if (loading) {
-    return <p>Carregando...</p>
-  }
-
-  if (!dashboardData) {
-    return <p>Erro ao carregar dados do dashboard.</p>
+    return <Loading withBackground />
   }
 
   const {
@@ -82,7 +79,7 @@ const DashboardPage: React.FC = () => {
     average_daily_spending_in_reais,
     economy,
     compensated_energy
-  } = dashboardData
+  } = dashboardData!
 
   const energyData = {
     labels: ['Consumo', 'Compensado'],
