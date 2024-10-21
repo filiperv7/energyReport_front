@@ -1,3 +1,4 @@
+import { DownloadSimple } from '@phosphor-icons/react'
 import {
   BarController,
   BarElement,
@@ -39,6 +40,7 @@ interface DashboardData {
   average_daily_spending_in_reais: number
   economy: number
   compensated_energy: number
+  path: string
 }
 
 const DashboardPage: React.FC = () => {
@@ -79,7 +81,8 @@ const DashboardPage: React.FC = () => {
     average_daily_spending,
     average_daily_spending_in_reais,
     economy,
-    compensated_energy
+    compensated_energy,
+    path
   } = dashboardData!
 
   const energyData = {
@@ -115,9 +118,17 @@ const DashboardPage: React.FC = () => {
       <Header />
       <div className="h-full flex flex-col items-center justify-center max-sm:pt-6">
         <div className="flex flex-col gap-4 max-xs:text-sm">
-          <h1 className="text-2xl font-bold max-xs:text-xl">
-            Dashboard da Fatura
-          </h1>
+          <div className="flex items-center gap-6">
+            <h1 className="text-2xl font-bold max-xs:text-xl">
+              Dashboard da Fatura
+            </h1>
+            <button
+              onClick={() => window.open(path, '_blank')}
+              className="bg-blue-500 text-xl text-white px-2 py-1 rounded hover:bg-blue-600 max-[404px]:px-1 max-[404px]:text-sm"
+            >
+              <DownloadSimple weight="bold" />
+            </button>
+          </div>
           <div>
             <p>
               Referente a: <span className="font-bold">{reference_date}</span>

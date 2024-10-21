@@ -10,6 +10,7 @@ export type ResponseListInvoicesType = {
   total: number
   economy: number
   flag_color: string
+  path: string
 }
 
 export const InvoiceList: React.FC<{
@@ -90,7 +91,10 @@ export const InvoiceList: React.FC<{
                 />
               </td>
               <td className="flex items-center gap-1 py-3 px-4 max-[504px]:px-2 max-[368px]:px-1">
-                <button className="bg-blue-500 text-xl text-white px-2 py-1 rounded hover:bg-blue-600 max-[404px]:px-1 max-[404px]:text-sm">
+                <button
+                  onClick={() => window.open(invoice.path, '_blank')}
+                  className="bg-blue-500 text-xl text-white px-2 py-1 rounded hover:bg-blue-600 max-[404px]:px-1 max-[404px]:text-sm"
+                >
                   <DownloadSimple weight="bold" />
                 </button>
                 <button
