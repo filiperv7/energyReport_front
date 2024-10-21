@@ -20,6 +20,8 @@ export const InvoiceList: React.FC<{
   const [invoices, setInvoices] = useState<ResponseListInvoicesType[]>([])
   const [loading, setLoading] = useState(true)
 
+  const enableS3Download = import.meta.env.VITE_ENABLE_S3_DOWNLOAD === 'true'
+
   useEffect(() => {
     const fetchInvoices = async () => {
       setLoading(true)
@@ -92,8 +94,15 @@ export const InvoiceList: React.FC<{
               </td>
               <td className="flex items-center gap-1 py-3 px-4 max-[504px]:px-2 max-[368px]:px-1">
                 <button
-                  onClick={() => window.open(invoice.path, '_blank')}
-                  className="bg-blue-500 text-xl text-white px-2 py-1 rounded hover:bg-blue-600 max-[404px]:px-1 max-[404px]:text-sm"
+                  onClick={() =>
+                    enableS3Download && window.open(invoice.path, '_blank')
+                  }
+                  className={`bg-blue-500 text-xl text-white px-2 py-1 rounded hover:bg-blue-600 max-[404px]:px-1 max-[404px]:text-sm ${
+                    !enableS3Download
+                      ? 'opacity-50 cursor-not-allowed'
+                      : 'hover:bg-blue-600 cursor-pointer'
+                  }`}
+                  disabled={!enableS3Download}
                 >
                   <DownloadSimple weight="bold" />
                 </button>

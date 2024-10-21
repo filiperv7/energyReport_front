@@ -48,6 +48,8 @@ const DashboardPage: React.FC = () => {
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
 
+  const enableS3Download = import.meta.env.VITE_ENABLE_S3_DOWNLOAD === 'true'
+
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
@@ -65,7 +67,7 @@ const DashboardPage: React.FC = () => {
     }
 
     fetchDashboardData()
-  })
+  }, [id_invoice])
 
   if (loading) {
     return <Loading withBackground />
@@ -124,8 +126,13 @@ const DashboardPage: React.FC = () => {
               Dashboard da Fatura
             </h1>
             <button
-              onClick={() => window.open(path, '_blank')}
-              className="bg-blue-500 text-xl text-white px-2 py-1 rounded hover:bg-blue-600 max-[404px]:px-1 max-[404px]:text-sm"
+              onClick={() => enableS3Download && window.open(path, '_blank')}
+              className={`bg-blue-500 text-xl text-white px-2 py-1 rounded max-[404px]:px-1 max-[404px]:text-sm ${
+                !enableS3Download
+                  ? 'opacity-50 cursor-not-allowed'
+                  : 'hover:bg-blue-600 cursor-pointer'
+              }`}
+              disabled={!enableS3Download}
             >
               <DownloadSimple weight="bold" />
             </button>
