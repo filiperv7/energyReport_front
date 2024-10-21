@@ -2,6 +2,8 @@
 
 Esta é uma aplicação React e TypeScript; também utilizei Tailwind CSS, Axios e Recharts.
 
+Acesse a aplicação online [clicando aqui](https://energy-report-front.vercel.app/).
+
 #### Aqui está o [Back-end](https://github.com/filiperv7/energyReport_back) desta aplicação.
 
 
