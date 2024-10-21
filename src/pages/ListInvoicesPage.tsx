@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { Header } from '../components/Header'
 import { InvoiceList } from '../components/InvoiceList'
 
 export const ListInvoicePage: React.FC = () => {
@@ -11,21 +12,24 @@ export const ListInvoicePage: React.FC = () => {
   }
 
   return (
-    <div className="py-10 px-6 flex flex-col items-center w-screen h-screen bg-gradient-to-br from-[#002C1F] to-[#00C26A]">
-      <div className="flex flex-col gap-5 max-w-3xl">
-        <div
-          className={`text-2xl font-bold text-white max-md:text-xl ${
-            !clientName && 'hidden'
-          }`}
-        >
-          <h1>Listagem de Faturas</h1>
-          <h3 className="text-xl max-md:text-base">Cliente: {clientName}</h3>
-        </div>
+    <div className="w-screen max-md:h-full h-screen py-10 px-6 bg-gradient-to-br from-[#002C1F] to-[#00C26A]">
+      <Header />
+      <div className="flex flex-col items-center pt-6">
+        <div className="flex flex-col gap-5 max-w-3xl">
+          <div
+            className={`text-2xl font-bold text-white max-md:text-xl ${
+              !clientName && 'hidden'
+            }`}
+          >
+            <h1>Listagem de Faturas</h1>
+            <h3 className="text-xl max-md:text-base">Cliente: {clientName}</h3>
+          </div>
 
-        <InvoiceList
-          clientNumber={client_number!}
-          setClientName={handleSetClientName}
-        />
+          <InvoiceList
+            clientNumber={client_number!}
+            setClientName={handleSetClientName}
+          />
+        </div>
       </div>
     </div>
   )

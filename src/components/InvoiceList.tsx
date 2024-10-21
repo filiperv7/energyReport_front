@@ -41,6 +41,10 @@ export const InvoiceList: React.FC<{
     fetchInvoices()
   }, [clientNumber])
 
+  const navigateToInvoice = (idInvoice: number) => {
+    window.location.href = `/dashboard/invoice/${idInvoice}`
+  }
+
   if (loading) {
     return <Loading />
   }
@@ -89,7 +93,10 @@ export const InvoiceList: React.FC<{
                 <button className="bg-blue-500 text-xl text-white px-2 py-1 rounded hover:bg-blue-600 max-[404px]:px-1 max-[404px]:text-sm">
                   <DownloadSimple weight="bold" />
                 </button>
-                <button className="bg-green-500 text-xl text-white px-2 py-1 rounded hover:bg-green-600 max-[404px]:px-1 max-[404px]:text-sm">
+                <button
+                  onClick={() => navigateToInvoice(invoice.id)}
+                  className="bg-green-500 text-xl text-white px-2 py-1 rounded hover:bg-green-600 max-[404px]:px-1 max-[404px]:text-sm"
+                >
                   <ChartLine weight="bold" />
                 </button>
               </td>
