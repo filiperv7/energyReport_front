@@ -11,7 +11,7 @@ Energy Report é um gerenciador de faturas de energia. Nele você pode:
 - fazer download da fatura;
 - buscar faturas por Nº de Cliente.
 
-## Como rodar a aplicação
+## Como rodar a aplicação (5 passos)
 ##### 1. Clone o projeto
 ```bash
 git clone https://github.com/filiperv7/energyReport_front.git
