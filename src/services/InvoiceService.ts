@@ -3,9 +3,10 @@ import axios from 'axios'
 class InvoiceService {
   private baseUrl: string
   private port = import.meta.env.SERVER_PORT || 3100
+  private host = import.meta.env.HOST || 'http://localhost'
 
   constructor() {
-    this.baseUrl = `http://localhost:${this.port}`
+    this.baseUrl = `${this.host}:${this.port}`
   }
 
   async uploadInvoice(formData: FormData) {
