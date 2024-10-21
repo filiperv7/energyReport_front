@@ -1,4 +1,4 @@
-import { DownloadSimple } from '@phosphor-icons/react'
+import { DownloadSimple, Flag } from '@phosphor-icons/react'
 import {
   BarController,
   BarElement,
@@ -82,7 +82,8 @@ const DashboardPage: React.FC = () => {
     average_daily_spending_in_reais,
     economy,
     compensated_energy,
-    path
+    path,
+    flag_color
   } = dashboardData!
 
   const energyData = {
@@ -130,9 +131,13 @@ const DashboardPage: React.FC = () => {
             </button>
           </div>
           <div>
-            <p>
-              Referente a: <span className="font-bold">{reference_date}</span>
-            </p>
+            <div className="flex items-center gap-2">
+              <p>
+                <span>Referente a: </span>
+                <span className="font-bold">{reference_date}</span>
+              </p>
+              <Flag size={20} weight="fill" color={flag_color ?? '#ffffff00'} />
+            </div>
             <p>
               Nº do Cliente: <span className="font-bold">{client_number}</span>
             </p>
